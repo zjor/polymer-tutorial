@@ -81,9 +81,12 @@ html,body {
 <script>
   var tabs = document.querySelector('paper-tabs');
 
+  var list = document.querySelector('post-list');
+
   tabs.addEventListener('iron-select', function() {
-    console.log("Selected: " + tabs.selected);
-  });
+    list.show = tabs.selected;
+  });  
+
 </script>
 
 

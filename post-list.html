@@ -20,7 +20,11 @@
     <div layout vertical center>
 
       <template is="dom-repeat" items="{{posts}}">
-        <post-card>
+        <post-card 
+          favorite="{{item.favorite}}" 
+          on-favorite-tap="handleFavorite" 
+          hidden?="{{show == 'favorites' && !item.favorite}}">
+
           <img src="{{item.avatar}}" width="70" height="70">
           <h2>{{item.username}}</h2>
           <p>{{item.text}}</p>
@@ -31,7 +35,20 @@
   </template>
   <script>
       Polymer({
-      is: "post-list",
-    });
+        is: "post-list",
+
+        properties: {
+          show: {
+            type: String,
+            value: "all",
+            notify: true
+          }
+        },
+
+        handleFavorite: function(e, sender) {
+          var post = e.model.__data__.item;
+          this.$.service.setFavorite(post.uid, post.favorite);
+        }
+      });
   </script>
 </dom-module>
