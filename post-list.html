@@ -1,0 +1,37 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="post-service/post-service.html">
+<link rel="import" href="post-card.html">
+
+<dom-module id="post-list">
+    <style>
+    :host {
+      display: block;
+      width: 100%;
+    }
+    post-card {
+      margin-bottom: 30px;
+    }
+    </style>
+
+  <template>
+    <post-service id="service" posts="{{posts}}">
+    </post-service>
+    
+    <div layout vertical center>
+
+      <template is="dom-repeat" items="{{posts}}">
+        <post-card>
+          <img src="{{item.avatar}}" width="70" height="70">
+          <h2>{{item.username}}</h2>
+          <p>{{item.text}}</p>
+        </post-card>
+      </template>
+      
+    </div>
+  </template>
+  <script>
+      Polymer({
+      is: "post-list",
+    });
+  </script>
+</dom-module>
