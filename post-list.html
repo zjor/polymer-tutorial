@@ -23,7 +23,7 @@
         <post-card 
           favorite="{{item.favorite}}" 
           on-favorite-tap="handleFavorite" 
-          hidden?="{{show == 'favorites' && !item.favorite}}">
+          hidden$="{{isHidden(show, item.favorite)}}">
 
           <img src="{{item.avatar}}" width="70" height="70">
           <h2>{{item.username}}</h2>
@@ -44,11 +44,14 @@
             notify: true
           }
         },
-
         handleFavorite: function(e, sender) {
           var post = e.model.__data__.item;
           this.$.service.setFavorite(post.uid, post.favorite);
+        },
+        isHidden: function(show, favorite) {
+          return show == '1' && !favorite;
         }
+
       });
   </script>
 </dom-module>
